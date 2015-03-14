@@ -61,7 +61,7 @@ public class QIndicatorBSboard implements IIndicatorBoard {
 
     public void setConfigFile(String configFile) {
         final String err = ("/".equals(File.separator)) ? "\\" : "/";
-        while (configFile.indexOf(err) != -1) {
+        while (configFile.contains(err)) {
             configFile = configFile.replace(err, File.separator);
         }
         this.configFile = configFile;
@@ -78,6 +78,7 @@ public class QIndicatorBSboard implements IIndicatorBoard {
         for (QUser user : QUserList.getInstance().getItems()) {
             final String id = AddrProp.getInstance().getId(user.getPoint());
             if (user.getCustomer() != null) {
+                System.out.println(user.getCustomer().getState());
                 if (user.getCustomer().getState() == CustomerState.STATE_INVITED || user.getCustomer().getState() == CustomerState.STATE_INVITED_SECONDARY) {
                     invList.add(id);
                     String string = "\\[" + id + "\\|blink\\]";

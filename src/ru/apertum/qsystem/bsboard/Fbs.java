@@ -23,8 +23,12 @@ import ru.apertum.qsystem.common.QLog;
  * @author Evgeniy Egorov
  */
 public class Fbs extends javax.swing.JFrame {
-    
+
     private final BrowserFX bfx = new BrowserFX();
+    private final BrowserFX bfxT = new BrowserFX();
+    private final BrowserFX bfxB = new BrowserFX();
+    private final BrowserFX bfxL = new BrowserFX();
+    private final BrowserFX bfxR = new BrowserFX();
 
     /**
      * Creates new form Fbs
@@ -40,8 +44,45 @@ public class Fbs extends javax.swing.JFrame {
         }
 
         GridLayout gl = new GridLayout(1, 1);
-        this.setLayout(gl);
-        this.add(bfx, BorderLayout.CENTER);
+        panelMain.setLayout(gl);
+        panelMain.add(bfx, BorderLayout.CENTER);
+
+        if (AddrProp.getInstance().getTopSize() == 0) {
+            panelTop.setVisible(false);
+        } else {
+            spAll.setDividerLocation(AddrProp.getInstance().getTopSize());
+
+            GridLayout glT = new GridLayout(1, 1);
+            panelTop.setLayout(glT);
+            panelTop.add(bfxT, BorderLayout.CENTER);
+            bfxT.load(AddrProp.getInstance().getTopUrl());
+        }
+
+        if (AddrProp.getInstance().getBottomSize() == 0) {
+            panelBottom.setVisible(false);
+        } else {
+            GridLayout glB = new GridLayout(1, 1);
+            panelBottom.setLayout(glB);
+            panelBottom.add(bfxB, BorderLayout.CENTER);
+            bfxB.load(AddrProp.getInstance().getBottomUrl());
+        }
+        if (AddrProp.getInstance().getLeftSize() == 0) {
+            panelLeft.setVisible(false);
+        } else {
+            spLeft.setDividerLocation(AddrProp.getInstance().getLeftSize());
+            GridLayout glL = new GridLayout(1, 1);
+            panelLeft.setLayout(glL);
+            panelLeft.add(bfxL, BorderLayout.CENTER);
+            bfxL.load(AddrProp.getInstance().getLeftUrl());
+        }
+        if (AddrProp.getInstance().getRightSize() == 0) {
+            panelRight.setVisible(false);
+        } else {
+            GridLayout glR = new GridLayout(1, 1);
+            panelRight.setLayout(glR);
+            panelRight.add(bfxR);
+            bfxR.load(AddrProp.getInstance().getRightUrl());
+        }
 
         QLog.l().logger().trace("Прочитали настройки для окна информации.");
     }
@@ -72,8 +113,8 @@ public class Fbs extends javax.swing.JFrame {
             setSize(1280, 720);
         }
     }
-    
-    public void loadContent(String cnt){
+
+    public void loadContent(String cnt) {
         bfx.loadContent(cnt);
     }
 
@@ -85,21 +126,133 @@ public class Fbs extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        spAll = new javax.swing.JSplitPane();
+        panelTop = new javax.swing.JPanel();
+        spBottom = new javax.swing.JSplitPane();
+        panelBottom = new javax.swing.JPanel();
+        spLeft = new javax.swing.JSplitPane();
+        panelLeft = new javax.swing.JPanel();
+        spRight = new javax.swing.JSplitPane();
+        panelMain = new javax.swing.JPanel();
+        panelRight = new javax.swing.JPanel();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentResized(java.awt.event.ComponentEvent evt) {
+                formComponentResized(evt);
+            }
+        });
+
+        spAll.setDividerLocation(150);
+        spAll.setDividerSize(0);
+        spAll.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        javax.swing.GroupLayout panelTopLayout = new javax.swing.GroupLayout(panelTop);
+        panelTop.setLayout(panelTopLayout);
+        panelTopLayout.setHorizontalGroup(
+            panelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1235, Short.MAX_VALUE)
+        );
+        panelTopLayout.setVerticalGroup(
+            panelTopLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 100, Short.MAX_VALUE)
+        );
+
+        spAll.setTopComponent(panelTop);
+
+        spBottom.setBorder(new javax.swing.border.MatteBorder(null));
+        spBottom.setDividerLocation(350);
+        spBottom.setDividerSize(0);
+        spBottom.setOrientation(javax.swing.JSplitPane.VERTICAL_SPLIT);
+
+        javax.swing.GroupLayout panelBottomLayout = new javax.swing.GroupLayout(panelBottom);
+        panelBottom.setLayout(panelBottomLayout);
+        panelBottomLayout.setHorizontalGroup(
+            panelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 1233, Short.MAX_VALUE)
+        );
+        panelBottomLayout.setVerticalGroup(
+            panelBottomLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 214, Short.MAX_VALUE)
+        );
+
+        spBottom.setBottomComponent(panelBottom);
+
+        spLeft.setBorder(new javax.swing.border.MatteBorder(null));
+        spLeft.setDividerLocation(150);
+        spLeft.setDividerSize(0);
+
+        javax.swing.GroupLayout panelLeftLayout = new javax.swing.GroupLayout(panelLeft);
+        panelLeft.setLayout(panelLeftLayout);
+        panelLeftLayout.setHorizontalGroup(
+            panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 149, Short.MAX_VALUE)
+        );
+        panelLeftLayout.setVerticalGroup(
+            panelLeftLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 347, Short.MAX_VALUE)
+        );
+
+        spLeft.setLeftComponent(panelLeft);
+
+        spRight.setBorder(new javax.swing.border.MatteBorder(null));
+        spRight.setDividerLocation(300);
+        spRight.setDividerSize(0);
+
+        javax.swing.GroupLayout panelMainLayout = new javax.swing.GroupLayout(panelMain);
+        panelMain.setLayout(panelMainLayout);
+        panelMainLayout.setHorizontalGroup(
+            panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 299, Short.MAX_VALUE)
+        );
+        panelMainLayout.setVerticalGroup(
+            panelMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 345, Short.MAX_VALUE)
+        );
+
+        spRight.setLeftComponent(panelMain);
+
+        javax.swing.GroupLayout panelRightLayout = new javax.swing.GroupLayout(panelRight);
+        panelRight.setLayout(panelRightLayout);
+        panelRightLayout.setHorizontalGroup(
+            panelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 781, Short.MAX_VALUE)
+        );
+        panelRightLayout.setVerticalGroup(
+            panelRightLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 345, Short.MAX_VALUE)
+        );
+
+        spRight.setRightComponent(panelRight);
+
+        spLeft.setRightComponent(spRight);
+
+        spBottom.setLeftComponent(spLeft);
+
+        spAll.setRightComponent(spBottom);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addComponent(spAll, javax.swing.GroupLayout.DEFAULT_SIZE, 1237, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addComponent(spAll, javax.swing.GroupLayout.DEFAULT_SIZE, 667, Short.MAX_VALUE)
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void formComponentResized(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_formComponentResized
+        if (AddrProp.getInstance().getBottomSize() != 0) {
+            spBottom.setDividerLocation(spBottom.getHeight() - AddrProp.getInstance().getBottomSize());
+        }
+        if (AddrProp.getInstance().getRightSize() != 0) {
+            spRight.setDividerLocation(spRight.getWidth() - AddrProp.getInstance().getRightSize());
+        }
+    }//GEN-LAST:event_formComponentResized
 
     /**
      * @param args the command line arguments
@@ -139,5 +292,14 @@ public class Fbs extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel panelBottom;
+    private javax.swing.JPanel panelLeft;
+    private javax.swing.JPanel panelMain;
+    private javax.swing.JPanel panelRight;
+    private javax.swing.JPanel panelTop;
+    private javax.swing.JSplitPane spAll;
+    private javax.swing.JSplitPane spBottom;
+    private javax.swing.JSplitPane spLeft;
+    private javax.swing.JSplitPane spRight;
     // End of variables declaration//GEN-END:variables
 }

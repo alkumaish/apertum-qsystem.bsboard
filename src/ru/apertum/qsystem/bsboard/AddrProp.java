@@ -6,12 +6,12 @@ package ru.apertum.qsystem.bsboard;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
+import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Properties;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 /**
  *
@@ -41,6 +41,32 @@ public class AddrProp {
         } catch (IOException ex) {
             System.err.println(ex);
             throw new RuntimeException(ex);
+        }
+
+        File f = new File("config/bsPluginContent.properties");
+        if (f.exists()) {
+            final FileInputStream inStream;
+            try {
+                inStream = new FileInputStream(f);
+            } catch (FileNotFoundException ex) {
+                throw new RuntimeException(ex);
+            }
+            final Properties settings = new Properties();
+            try {
+                settings.load(new InputStreamReader(inStream, "UTF-8"));
+            } catch (IOException ex) {
+                throw new RuntimeException("Cant read version. " + ex);
+            }
+
+            topSize = Integer.parseInt(settings.getProperty("top.size", "0"));
+            topUrl = settings.getProperty("top.url");
+            leftSize = Integer.parseInt(settings.getProperty("left.size", "0"));
+            leftUrl = settings.getProperty("left.url");
+            rightSize = Integer.parseInt(settings.getProperty("right.size", "0"));
+            rightUrl = settings.getProperty("right.url");
+            bottomSize = Integer.parseInt(settings.getProperty("bottom.size", "0"));
+            bottomUrl = settings.getProperty("bottom.url");
+
         }
     }
 
@@ -98,4 +124,49 @@ public class AddrProp {
          }
          */
     }
+
+    int topSize = 0;
+    String topUrl = "";
+    int leftSize = 0;
+    String leftUrl = "";
+    int rightSize = 0;
+    String rightUrl = "";
+    int bottomSize = 0;
+    String bottomUrl = "";
+
+    public int getTopSize() {
+        return topSize;
+    }
+
+    public String getTopUrl() {
+        return topUrl;
+    }
+
+    public int getLeftSize() {
+        return leftSize;
+    }
+
+    public String getLeftUrl() {
+        return leftUrl;
+    }
+
+    public int getRightSize() {
+        return rightSize;
+    }
+
+    public int getBottomSize() {
+        return bottomSize;
+    }
+
+    public String getBottomUrl() {
+        return bottomUrl;
+    }
+
+    public String getRightUrl() {
+        return rightUrl;
+    }
+    
+
+    
+
 }
